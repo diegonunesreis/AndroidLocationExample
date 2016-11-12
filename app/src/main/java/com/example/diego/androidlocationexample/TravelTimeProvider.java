@@ -223,22 +223,25 @@ public class TravelTimeProvider implements
         return data;
     }
 
-    private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String, String>>>> {
+    private class ParserTask extends AsyncTask<String, Void,String> {
         @Override
-        protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
-
+        protected String doInBackground(String... jsonData) {
             JSONObject jObject;
             try {
                 jObject = new JSONObject(jsonData[0]);
                 DataParser parser = new DataParser();
                 routeInfo = parser.parseRouteInfo(jObject);
-                setRouteInfo();
             } catch (Exception e) {
                 e.printStackTrace();
             }
             return null;
         }
 
+        @Override
+        protected void onPostExecute(String s) {
+            //super.onPostExecute(s);
+            setRouteInfo();
+        }
     }
 
     public void setRouteInfo() {
@@ -247,5 +250,4 @@ public class TravelTimeProvider implements
         duration = routeInfo[0].substring(9, (routeInfo[0].length() - 1));
         mTravelTimeCallback.handleNewTravelTime(duration);
     }
-
 }

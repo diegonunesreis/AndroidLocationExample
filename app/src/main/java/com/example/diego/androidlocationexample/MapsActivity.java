@@ -36,11 +36,6 @@ public class MapsActivity extends FragmentActivity implements TravelTimeProvider
 
     public void handleNewTravelTime(final String duration) {
         Log.d("Tempo de Percurso: ", duration.toString());
-
-        infoTV.post(new Runnable() {
-            public void run() {
-                infoTV.setText(duration);
-            }
-        });
+        infoTV.setText(duration);
     }
 }
