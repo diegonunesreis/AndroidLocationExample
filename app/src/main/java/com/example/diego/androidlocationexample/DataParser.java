@@ -13,6 +13,28 @@ package com.example.diego.androidlocationexample;
 
 public class DataParser {
 
+    public String parseTravelTime(JSONObject jObject) {
+        JSONArray jRoutes;
+        JSONArray jLegs;
+        String travelTime = "";
+        try {
+            jRoutes = jObject.getJSONArray("routes");
+
+            //Atravessando todas as rotas
+            for (int i = 0; i < jRoutes.length(); i++) {
+                jLegs = ((JSONObject) jRoutes.get(i)).getJSONArray("legs");
+
+                //Pegando informação de duração
+                JSONObject info = jLegs.getJSONObject(0);
+                travelTime = info.getString("duration");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+        }
+        return travelTime;
+    }
+
     public String[] parseRouteInfo(JSONObject jObject) {
         JSONArray jRoutes;
         JSONArray jLegs;
@@ -35,6 +57,7 @@ public class DataParser {
         }
         return routeInfo;
     }
+
 
     /**
      * Recebe um objeto JSONO e retorna uma lista de listas contendo latitude and longitude
