@@ -27,8 +27,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
 
 import static android.support.v4.app.ActivityCompat.requestPermissions;
 
@@ -223,7 +221,7 @@ public class TravelTimeProvider implements
         return data;
     }
 
-    private class ParserTask extends AsyncTask<String, Void,String> {
+    private class ParserTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... jsonData) {
             JSONObject jObject;
@@ -242,6 +240,7 @@ public class TravelTimeProvider implements
             //super.onPostExecute(s);
             setRouteInfo();
         }
+
     }
 
     public void setRouteInfo() {
